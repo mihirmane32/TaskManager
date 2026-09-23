@@ -21,12 +21,18 @@ The application entry point in [TaskManager/Program.cs](TaskManager/Program.cs) 
 
 ## Project Structure
 
-- [TaskManager/Program.cs](TaskManager/Program.cs) - application entry point
-- [TaskManager/Models/Task.cs](TaskManager/Models/Task.cs) - task entity model
-- [TaskManager/Models/TaskItemStatus.cs](TaskManager/Models/TaskItemStatus.cs) - task status enum
-- [TaskManager/Models/TaskPriority.cs](TaskManager/Models/TaskPriority.cs) - task priority enum
-- [TaskManager/Services/TaskService.cs](TaskManager/Services/TaskService.cs) - task management logic
-- [TaskManager/TaskManager.csproj](TaskManager/TaskManager.csproj) - .NET project configuration
+```
+TaskManager/
+|--Models/
+|  |--Task.cs                   # Represents a single task (data only)
+|  |--TaskItemStatus.cs         # Enum: Pending, InProgress, Completed
+|  |--TaskPriority.cs           # Enum: High, Medium, Low
+|
+|--Service/
+|  |--TaskService.cs            # Owns task list; add/complete/delete logic, ID generation
+|
+|--Program.cs                   # Entry point (CLI menu) - Todo
+```
 
 ## Running the Project
 

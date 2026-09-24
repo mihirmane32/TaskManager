@@ -28,7 +28,7 @@ TaskManager/
 |  |--TaskItemStatus.cs         # Enum: Pending, InProgress, Completed
 |  |--TaskPriority.cs           # Enum: High, Medium, Low
 |
-|--Service/
+|--Services/
 |  |--TaskService.cs            # Owns task list; add/complete/delete logic, ID generation
 |
 |--Program.cs                   # Entry point (CLI menu) - Todo
@@ -41,14 +41,6 @@ From the project root, run:
 ```bash
 dotnet build
 dotnet run
-```
-
-## Verification
-
-This project was verified with a successful build:
-
-```bash
-dotnet build
 ```
 
 Build result: succeeded.

@@ -48,13 +48,59 @@ while (running)
 
             break;
         case "2":
-            // TODO: view tasks
+            var allTasks = taskService.GetAllTask();
+
+            if (allTasks.Count == 0)
+            {
+                Console.WriteLine("No tasks found.");
+                break;
+            }
+
+            foreach (var task in allTasks)
+            {
+                Console.WriteLine($"[{task.Id}] {task.Title} - {task.Status} - {task.Priority} - Due: {task.DueDate:yyyy-MM-dd}");
+            }
+
             break;
         case "3":
-            // TODO: mark complete
+            Console.Write("Enter task ID to mark complete: ");
+            string idInput = Console.ReadLine() ?? "";
+
+            if (!int.TryParse(idInput, out int id))
+            {
+                Console.WriteLine("Invalid ID. Please enter a number.");
+                break;
+            }
+
+            if (taskService.MarkComplete(id))
+            {
+                Console.WriteLine($"Task {id} marked as complete.");
+            }
+            else
+            {
+                Console.WriteLine($"No task found with ID {id}.");
+            }
+
             break;
         case "4":
-            // TODO: delete task
+            Console.Write("Enter task ID to delete: ");
+            string inputId = Console.ReadLine() ?? "";
+
+            if (!int.TryParse(inputId, out int delId))
+            {
+                Console.WriteLine("Invalid ID. Please enter a number.");
+                break;
+            }
+
+            if (taskService.DeleteTask(delId))
+            {
+                Console.WriteLine($"Task {delId} deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"No task found with ID {delId}.");
+            }
+
             break;
         case "5":
             running = false;

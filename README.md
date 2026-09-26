@@ -1,6 +1,6 @@
 # Task Manager
 
-A small .NET console application for managing tasks. The project is currently in an early stage and includes the core task model and service layer for task operations.
+A small .NET console application for managing tasks. The project currently has a fully working in-memory CLI: add, view, complete, and delete tasks.
 
 ## Current Progress
 
@@ -13,11 +13,9 @@ The project currently includes:
   - add a task
   - mark a task as complete
   - delete a task
+- A working CLI menu in `Program.cs` with options to add, view, mark complete, and delete tasks
+- Basic input validation: invalid priority, invalid due date, invalid/non-existent task ID are all handled without crashing
 - A working .NET project structure that builds successfully
-
-## Important Note
-
-The application entry point in [TaskManager/Program.cs](TaskManager/Program.cs) is still the default C# starter template output (`Hello, World!`). The project is functional at the model/service layer, but the interactive console flow and user-facing menu still need to be implemented.
 
 ## Project Structure
 
@@ -47,11 +45,9 @@ Build result: succeeded.
 
 ## Not yet implemented
 
-- CLI menu / entry point (`Program.cs`)
-- File persistence (save/load tasks to disk)
-- Input validation
+- File persistence (save/load tasks to disk - tasks are lost on restart)
 - Editing tasks (title/description/due date updates)
-- Listing/filtering/sorting tasks
+- Listing/filtering/sorting tasks (e.g. by status or priority)
 
 ## Status
 

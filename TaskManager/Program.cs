@@ -1,7 +1,8 @@
 ﻿using TaskManager.Models;
 using TaskManager.Services;
 
-var taskService = new TaskService();
+var taskRepository = new TaskRepository("tasks.json");
+var taskService = new TaskService(taskRepository);
 bool running = true;
 
 while (running)

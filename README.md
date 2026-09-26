@@ -1,6 +1,6 @@
 # Task Manager
 
-A small .NET console application for managing tasks. The project currently has a fully working in-memory CLI: add, view, complete, and delete tasks.
+A small .NET console application for managing tasks. The project currently has a fully working with JSON file persistence: add, view, complete, and delete tasks with data surviving app restarts.
 
 ## Current Progress
 
@@ -13,6 +13,8 @@ The project currently includes:
   - add a task
   - mark a task as complete
   - delete a task
+- A `TaskRepository` that saves and loads tasks to/from a JSON file (`tasks.json`)
+- Tasks persist across app restarts - The ID counter correctly resumes from the highest saved ID instead of restarting at 1
 - A working CLI menu in `Program.cs` with options to add, view, mark complete, and delete tasks
 - Basic input validation: invalid priority, invalid due date, invalid/non-existent task ID are all handled without crashing
 - A working .NET project structure that builds successfully
@@ -28,8 +30,9 @@ TaskManager/
 |
 |--Services/
 |  |--TaskService.cs            # Owns task list; add/complete/delete logic, ID generation
+|  |--TaskRepository.cs         # Handles saving/loading tasks to/from a JSON file
 |
-|--Program.cs                   # Entry point (CLI menu) - Todo
+|--Program.cs                   # Entry point: working CLI menu (add/view/complete/delete)
 ```
 
 ## Running the Project
@@ -45,7 +48,6 @@ Build result: succeeded.
 
 ## Not yet implemented
 
-- File persistence (save/load tasks to disk - tasks are lost on restart)
 - Editing tasks (title/description/due date updates)
 - Listing/filtering/sorting tasks (e.g. by status or priority)
 

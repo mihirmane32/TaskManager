@@ -9,7 +9,6 @@
         public TaskPriority Priority { get; set; }
         public DateTime DueDate { get; set; }
 
-
         public Task(int id, string title, string description, TaskItemStatus status, TaskPriority priority, DateTime dueDate)
         {
             Id = id;

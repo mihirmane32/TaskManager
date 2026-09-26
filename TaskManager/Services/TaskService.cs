@@ -4,9 +4,17 @@ namespace TaskManager.Services
 {
     public class TaskService
     {
-        private readonly List<Models.Task> _task = new List<Models.Task>();
+        private readonly List<Models.Task> _task;
+        private readonly TaskRepository _taskRepository;
+        private int _nextId;
 
-        private int _nextId = 1;
+        public TaskService(TaskRepository taskRepository)
+        {
+            _taskRepository = taskRepository;
+            _task = _taskRepository.LoadTasks();
+
+            _nextId = _task.Any() ? _task.Max(t => t.Id) + 1 : 1;
+        }
 
         public IReadOnlyList<Models.Task> GetAllTask()
         {
@@ -19,6 +27,7 @@ namespace TaskManager.Services
 
             _task.Add(task);
             _nextId = _nextId + 1;
+            _taskRepository.SaveTask(_task);
 
             return task;
         }
@@ -29,6 +38,7 @@ namespace TaskManager.Services
             if (task is null) return false;
 
             task.Status = TaskItemStatus.Completed;
+            _taskRepository.SaveTask(_task); 
             return true;
         }
 
@@ -38,6 +48,7 @@ namespace TaskManager.Services
             if (task is null) return false;
 
             _task.Remove(task);
+            _taskRepository.SaveTask(_task);
             return true;
         }
     }

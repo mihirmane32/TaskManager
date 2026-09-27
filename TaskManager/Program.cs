@@ -106,6 +106,83 @@ while (running)
         case "5":
             running = false;
             break;
+        case "6":
+            Console.Write("Enter task ID to edit: ");
+            string editIdInput = Console.ReadLine() ?? "";
+
+            if (!int.TryParse(editIdInput, out int editId))
+            {
+                Console.WriteLine("Invalid ID. Please enter a number.");
+                break;
+            }
+
+            var taskToEdit = taskService.GetTaskById(editId);
+            if (taskToEdit is null)
+            {
+                Console.WriteLine($"No task found with ID {editId}.");
+                break;
+            }
+
+            bool editing = true;
+            while (editing)
+            {
+                Console.WriteLine($"\nEditing Task [{taskToEdit.Id}]");
+                Console.WriteLine($"1. Title: {taskToEdit.Title}");
+                Console.WriteLine($"2. Description: {taskToEdit.Description}");
+                Console.WriteLine($"3. Priority: {taskToEdit.Priority}");
+                Console.WriteLine($"4. Due Date: {taskToEdit.DueDate:yyyy-MM-dd}");
+                Console.WriteLine("5. Done Editing");
+                Console.Write("Choose a field to edit: ");
+
+                string editChoice = Console.ReadLine() ?? "";
+
+                switch (editChoice)
+                {
+                    case "1":
+                        Console.Write("New title: ");
+                        taskToEdit.Title = Console.ReadLine() ?? "";
+                        taskService.SaveChanges();
+                        break;
+                    case "2":
+                        Console.Write("New description: ");
+                        taskToEdit.Description = Console.ReadLine() ?? "";
+                        taskService.SaveChanges();
+                        break;
+                    case "3":
+                        Console.Write("New Priority (High/Medium/Low): ");
+                        string newPriority = Console.ReadLine() ?? "";
+
+                        if (!Enum.TryParse<TaskPriority>(newPriority, true, out priority))
+                        {
+                            Console.WriteLine("Invalid priority. Please enter valid priority value.");
+                            break;
+                        }
+
+                        taskToEdit.Priority = priority;
+                        taskService.SaveChanges();
+                        break;
+                    case "4":
+                        Console.Write("New Due Date (e.g. 2026-12-25): ");
+                        string newDueDate = Console.ReadLine() ?? "";
+
+                        if (!DateTime.TryParse(newDueDate, out DateTime editDueDate))
+                        {
+                            Console.WriteLine("Invalid due date. Please enter valid due date.");
+                            break;
+                        }
+
+                        taskToEdit.DueDate = editDueDate;
+                        taskService.SaveChanges();
+                        break;
+                    case "5":
+                        editing = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid options.");
+                        break;
+                }
+                break;
+            }
         default:
             Console.WriteLine("Invalid option, try again.");
             break;

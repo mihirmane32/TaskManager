@@ -27,7 +27,7 @@ namespace TaskManager.Services
 
             _tasks.Add(task);
             _nextId = _nextId + 1;
-            _taskRepository.SaveTask(_tasks);
+            _taskRepository.SaveTasks(_tasks);
 
             return task;
         }
@@ -38,7 +38,7 @@ namespace TaskManager.Services
             if (task is null) return false;
 
             task.Status = TaskItemStatus.Completed;
-            _taskRepository.SaveTask(_tasks); 
+            _taskRepository.SaveTasks(_tasks); 
             return true;
         }
 
@@ -48,7 +48,7 @@ namespace TaskManager.Services
             if (task is null) return false;
 
             _tasks.Remove(task);
-            _taskRepository.SaveTask(_tasks);
+            _taskRepository.SaveTasks(_tasks);
             return true;
         }
 
@@ -59,7 +59,7 @@ namespace TaskManager.Services
 
         public void SaveChanges()
         {
-            _taskRepository.SaveTask(_tasks);
+            _taskRepository.SaveTasks(_tasks);
         }
     }
 }

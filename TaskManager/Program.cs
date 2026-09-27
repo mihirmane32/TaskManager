@@ -13,6 +13,7 @@ while (running)
     Console.WriteLine("3. Mark Task Complete");
     Console.WriteLine("4. Delete Task");
     Console.WriteLine("5. Exit");
+    Console.WriteLine("6. Edit Task");
     Console.WriteLine("Choose an option: ");
 
     string? choice = Console.ReadLine();

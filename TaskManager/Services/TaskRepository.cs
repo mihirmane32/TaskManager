@@ -11,7 +11,7 @@ namespace TaskManager.Services
             _filePath = filePath;
         }
 
-        public void SaveTask(List<Models.Task> tasks)
+        public void SaveTasks(List<Models.Task> tasks)
         {
             string json = JsonSerializer.Serialize(tasks);
             File.WriteAllText(_filePath, json);

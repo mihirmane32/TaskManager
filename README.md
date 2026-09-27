@@ -1,23 +1,16 @@
 # Task Manager
 
-A small .NET console application for managing tasks. The project currently has a fully working with JSON file persistence: add, view, complete, and delete tasks with data surviving app restarts.
+A small CLI task manager I'm building in .NET as part of learning to think and code like a real engineer, not just things to run. Right now it's fully functional: you can add, view, complete, and delete tasks, and everything gets saved to disk so it survives a restart.
 
-## Current Progress
+## What's working right now
 
-The project currently includes:
-
-- A `Task` model with fields for ID, title, description, status, priority, and due date
-- Enums for task status and priority
-- A `TaskService` class with basic functionality to:
-  - get all tasks
-  - add a task
-  - mark a task as complete
-  - delete a task
-- A `TaskRepository` that saves and loads tasks to/from a JSON file (`tasks.json`)
-- Tasks persist across app restarts - The ID counter correctly resumes from the highest saved ID instead of restarting at 1
-- A working CLI menu in `Program.cs` with options to add, view, mark complete, and delete tasks
-- Basic input validation: invalid priority, invalid due date, invalid/non-existent task ID are all handled without crashing
-- A working .NET project structure that builds successfully
+- A `Task` model - just the data: ID, title, description, status, priority, due date
+- Enums for status and priority instead of raw strings, so invalid values can't sneak in
+- `TaskService` - The brains of the app" add a task, mark one complete, delete one, list them all
+- `TaskRepository` - reads and writes tasks to a JSON file (`tasks.json`), so nothing gets lost between runs 
+- Tasks actually persist across restarts, and new task IDs pick up from the highest existing ID instead of resetting to 1 (this one took a bit of thinking to get right) 
+- A working CLI menu in `Program.cs` - add, view, or a task ID that doesn't exist - none of it crashes the app 
+- Builds cleanly, no errors
 
 ## Project Structure
 
@@ -35,7 +28,7 @@ TaskManager/
 |--Program.cs                   # Entry point: working CLI menu (add/view/complete/delete)
 ```
 
-## Running the Project
+## Running it
 
 From the project root, run:
 
@@ -44,13 +37,13 @@ dotnet build
 dotnet run
 ```
 
-Build result: succeeded.
+Builds and runs fine as of now.
 
 ## Not yet implemented
 
-- Editing tasks (title/description/due date updates)
-- Listing/filtering/sorting tasks (e.g. by status or priority)
+- Editing an existing task (title/description/due date)
+- Filtering/sorting the task list (by status, priority, etc.)
 
 ## Status
 
-Status: In progress
+In progress - core functionality works, polishing and extending from here.

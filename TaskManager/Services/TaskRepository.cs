@@ -24,8 +24,16 @@ namespace TaskManager.Services
                 return new List<Models.Task>();
             }
 
-            string json = File.ReadAllText(_filePath);
-            return JsonSerializer.Deserialize<List<Models.Task>>(json) ?? new List<Models.Task>();
+            try
+            {
+                string json = File.ReadAllText(_filePath);
+                return JsonSerializer.Deserialize<List<Models.Task>>(json) ?? new List<Models.Task>();
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Warning: tasks.json is corrupted and couldn't be read ({ex.Message}). Starting with an empty task list.");
+                return new List<Models.Task>();
+            }
         }
     }
 }

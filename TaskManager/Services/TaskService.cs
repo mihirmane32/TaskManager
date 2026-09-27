@@ -57,9 +57,9 @@ namespace TaskManager.Services
             return _tasks.FirstOrDefault(t => t.Id == id);
         }
 
-        public Models.Task SaveChanges(Models.Task task)
+        public void SaveChanges()
         {
-            
+            _taskRepository.SaveTask(_tasks);
         }
     }
 }

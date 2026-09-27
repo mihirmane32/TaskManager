@@ -17,7 +17,7 @@ while (running)
 
     string? choice = Console.ReadLine();
 
-    switch(choice)
+    switch (choice)
     {
         case "1":
             Console.Write("Title: ");
@@ -38,7 +38,7 @@ while (running)
             Console.Write("Due Date (e.g. 2026-12-25):");
             string dueDateInput = Console.ReadLine() ?? "";
 
-            if (!DateTime.TryParse(dueDateInput, out DateTime dueDate)) 
+            if (!DateTime.TryParse(dueDateInput, out DateTime dueDate))
             {
                 Console.WriteLine("Invalid due date. Task not added.");
                 break;
@@ -152,13 +152,13 @@ while (running)
                         Console.Write("New Priority (High/Medium/Low): ");
                         string newPriority = Console.ReadLine() ?? "";
 
-                        if (!Enum.TryParse<TaskPriority>(newPriority, true, out priority))
+                        if (!Enum.TryParse<TaskPriority>(newPriority, true, out TaskPriority newPriorityValue))
                         {
                             Console.WriteLine("Invalid priority. Please enter valid priority value.");
                             break;
                         }
 
-                        taskToEdit.Priority = priority;
+                        taskToEdit.Priority = newPriorityValue;
                         taskService.SaveChanges();
                         break;
                     case "4":
@@ -181,8 +181,8 @@ while (running)
                         Console.WriteLine("Invalid options.");
                         break;
                 }
-                break;
             }
+            break;
         default:
             Console.WriteLine("Invalid option, try again.");
             break;

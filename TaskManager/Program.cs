@@ -50,17 +50,51 @@ while (running)
 
             break;
         case "2":
-            var allTasks = taskService.GetAllTask();
+            
 
-            if (allTasks.Count == 0)
-            {
-                Console.WriteLine("No tasks found.");
-                break;
-            }
+            bool viewTasks = true;
 
-            foreach (var task in allTasks)
+            while (viewTasks)
             {
-                Console.WriteLine($"[{task.Id}] {task.Title} - {task.Status} - {task.Priority} - Due: {task.DueDate:yyyy-MM-dd}");
+                Console.WriteLine("\nView Task");
+                Console.WriteLine("1. View All");
+                Console.WriteLine("2. Filter By Status");
+                Console.WriteLine("3. Filter By Priority");
+                Console.WriteLine("4. Sort By Due Date");
+                Console.WriteLine("5. Done");
+                Console.Write("Choose a field to edit: ");
+
+                string viewChoice = Console.ReadLine() ?? "";
+
+                switch (viewChoice)
+                {
+                    case "1":
+                        var allTasks = taskService.GetAllTask();
+
+                        if (allTasks.Count == 0)
+                        {
+                            Console.WriteLine("No tasks found.");
+                            break;
+                        }
+
+                        foreach (var task in allTasks)
+                        {
+                            Console.WriteLine($"[{task.Id}] {task.Title} - {task.Status} - {task.Priority} - Due: {task.DueDate:yyyy-MM-dd}");
+                        }
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+                        viewTasks = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
             }
 
             break;

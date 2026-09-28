@@ -83,6 +83,27 @@ while (running)
                         }
                         break;
                     case "2":
+                        Console.WriteLine("Enter status (Pending/InProgress/Completed): ");
+                        var inputStatus = Console.ReadLine() ?? "";
+
+                        if (!Enum.TryParse<TaskItemStatus>(inputStatus, true, out TaskItemStatus status))
+                        {
+                            Console.WriteLine("Invalid status. Please enter valid status.");
+                            break;
+                        }
+
+                        var filteredStatus = taskService.GetTasksByStatus(status);
+
+                        if (filteredStatus.Count == 0)
+                        {
+                            Console.WriteLine($"No tasks found with status: {status}.");
+                            break;
+                        }
+
+                        foreach (var filteredTask in filteredStatus)
+                        {
+                            Console.WriteLine($"[{filteredTask.Id}] {filteredTask.Title} - {filteredTask.Status} - {filteredTask.Priority} - Due: {filteredTask.DueDate:yyyy-MM-dd}");
+                        }
                         break;
                     case "3":
                         break;

@@ -111,7 +111,7 @@ while (running)
 
                         if(!Enum.TryParse<TaskPriority>(inputPriority, true, out TaskPriority priorityValue))
                         {
-                            Console.WriteLine("Invalid status. Please enter valid status.");
+                            Console.WriteLine("Invalid status. Please enter valid priority.");
                             break;
                         }
 
@@ -130,6 +130,12 @@ while (running)
                         break;
                     case "4":
                         var sortedDueDate = taskService.GetTasksSortedByDueDate();
+
+                        if (sortedDueDate.Count == 0)
+                        {
+                            Console.WriteLine($"No tasks found.");
+                            break;
+                        }
 
                         foreach (var filteredTask in sortedDueDate)
                         {

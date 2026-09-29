@@ -106,8 +106,35 @@ while (running)
                         }
                         break;
                     case "3":
+                        Console.WriteLine("Enter priority (High/Medium/Low): ");
+                        var inputPriority = Console.ReadLine() ?? "";
+
+                        if(!Enum.TryParse<TaskPriority>(inputPriority, true, out TaskPriority priorityValue))
+                        {
+                            Console.WriteLine("Invalid status. Please enter valid status.");
+                            break;
+                        }
+
+                        var filteredPriority = taskService.GetTasksByPriority(priorityValue);
+
+                        if (filteredPriority.Count == 0)
+                        {
+                            Console.WriteLine($"No tasks found with priority: {priorityValue}.");
+                            break;
+                        }
+
+                        foreach (var filteredTask in filteredPriority)
+                        {
+                            Console.WriteLine($"[{filteredTask.Id}] {filteredTask.Title} - {filteredTask.Status} - {filteredTask.Priority} - Due: {filteredTask.DueDate:yyyy-MM-dd}");
+                        }
                         break;
                     case "4":
+                        var sortedDueDate = taskService.GetTasksSortedByDueDate();
+
+                        foreach (var filteredTask in sortedDueDate)
+                        {
+                            Console.WriteLine($"[{filteredTask.Id}] {filteredTask.Title} - {filteredTask.Status} - {filteredTask.Priority} - Due: {filteredTask.DueDate:yyyy-MM-dd}");
+                        }
                         break;
                     case "5":
                         viewTasks = false;

@@ -50,17 +50,105 @@ while (running)
 
             break;
         case "2":
-            var allTasks = taskService.GetAllTask();
+            
 
-            if (allTasks.Count == 0)
-            {
-                Console.WriteLine("No tasks found.");
-                break;
-            }
+            bool viewTasks = true;
 
-            foreach (var task in allTasks)
+            while (viewTasks)
             {
-                Console.WriteLine($"[{task.Id}] {task.Title} - {task.Status} - {task.Priority} - Due: {task.DueDate:yyyy-MM-dd}");
+                Console.WriteLine("\nView Task");
+                Console.WriteLine("1. View All");
+                Console.WriteLine("2. Filter By Status");
+                Console.WriteLine("3. Filter By Priority");
+                Console.WriteLine("4. Sort By Due Date");
+                Console.WriteLine("5. Done");
+                Console.Write("Choose a field to edit: ");
+
+                string viewChoice = Console.ReadLine() ?? "";
+
+                switch (viewChoice)
+                {
+                    case "1":
+                        var allTasks = taskService.GetAllTask();
+
+                        if (allTasks.Count == 0)
+                        {
+                            Console.WriteLine("No tasks found.");
+                            break;
+                        }
+
+                        foreach (var task in allTasks)
+                        {
+                            Console.WriteLine($"[{task.Id}] {task.Title} - {task.Status} - {task.Priority} - Due: {task.DueDate:yyyy-MM-dd}");
+                        }
+                        break;
+                    case "2":
+                        Console.WriteLine("Enter status (Pending/InProgress/Completed): ");
+                        var inputStatus = Console.ReadLine() ?? "";
+
+                        if (!Enum.TryParse<TaskItemStatus>(inputStatus, true, out TaskItemStatus status))
+                        {
+                            Console.WriteLine("Invalid status. Please enter valid status.");
+                            break;
+                        }
+
+                        var filteredStatus = taskService.GetTasksByStatus(status);
+
+                        if (filteredStatus.Count == 0)
+                        {
+                            Console.WriteLine($"No tasks found with status: {status}.");
+                            break;
+                        }
+
+                        foreach (var filteredTask in filteredStatus)
+                        {
+                            Console.WriteLine($"[{filteredTask.Id}] {filteredTask.Title} - {filteredTask.Status} - {filteredTask.Priority} - Due: {filteredTask.DueDate:yyyy-MM-dd}");
+                        }
+                        break;
+                    case "3":
+                        Console.WriteLine("Enter priority (High/Medium/Low): ");
+                        var inputPriority = Console.ReadLine() ?? "";
+
+                        if(!Enum.TryParse<TaskPriority>(inputPriority, true, out TaskPriority priorityValue))
+                        {
+                            Console.WriteLine("Invalid status. Please enter valid priority.");
+                            break;
+                        }
+
+                        var filteredPriority = taskService.GetTasksByPriority(priorityValue);
+
+                        if (filteredPriority.Count == 0)
+                        {
+                            Console.WriteLine($"No tasks found with priority: {priorityValue}.");
+                            break;
+                        }
+
+                        foreach (var filteredTask in filteredPriority)
+                        {
+                            Console.WriteLine($"[{filteredTask.Id}] {filteredTask.Title} - {filteredTask.Status} - {filteredTask.Priority} - Due: {filteredTask.DueDate:yyyy-MM-dd}");
+                        }
+                        break;
+                    case "4":
+                        var sortedDueDate = taskService.GetTasksSortedByDueDate();
+
+                        if (sortedDueDate.Count == 0)
+                        {
+                            Console.WriteLine($"No tasks found.");
+                            break;
+                        }
+
+                        foreach (var filteredTask in sortedDueDate)
+                        {
+                            Console.WriteLine($"[{filteredTask.Id}] {filteredTask.Title} - {filteredTask.Status} - {filteredTask.Priority} - Due: {filteredTask.DueDate:yyyy-MM-dd}");
+                        }
+                        break;
+                    case "5":
+                        viewTasks = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
             }
 
             break;

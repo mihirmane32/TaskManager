@@ -61,5 +61,20 @@ namespace TaskManager.Services
         {
             _taskRepository.SaveTasks(_tasks);
         }
+
+        public IReadOnlyList<Models.Task> GetTasksByStatus(TaskItemStatus status)
+        {
+            return _tasks.Where(t => t.Status == status).ToList();
+        }
+
+        public IReadOnlyList<Models.Task> GetTasksByPriority(TaskPriority priority)
+        {
+            return _tasks.Where(t => t.Priority == priority).ToList();
+        }
+
+        public IReadOnlyList<Models.Task> GetTasksSortedByDueDate()
+        {
+            return _tasks.OrderBy(t => t.DueDate).ToList();
+        }
     }
 }

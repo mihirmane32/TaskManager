@@ -7,14 +7,16 @@ bool running = true;
 
 while (running)
 {
-    Console.WriteLine("\n--- Task Manager ---");
-    Console.WriteLine("1. Add Task");
-    Console.WriteLine("2. View Tasks");
-    Console.WriteLine("3. Mark Task Complete");
-    Console.WriteLine("4. Delete Task");
-    Console.WriteLine("5. Exit");
-    Console.WriteLine("6. Edit Task");
-    Console.WriteLine("Choose an option: ");
+    Console.WriteLine("\n========================");
+    Console.WriteLine("       TASK MANAGER");
+    Console.WriteLine("========================");
+    Console.WriteLine("  1. Add task");
+    Console.WriteLine("  2. View tasks");
+    Console.WriteLine("  3. Mark task complete");
+    Console.WriteLine("  4. Delete task");
+    Console.WriteLine("  5. Edit task");
+    Console.WriteLine("  6. Exit");
+    Console.Write("\nSelect an option: ");
 
     string? choice = Console.ReadLine();
 
@@ -36,7 +38,7 @@ while (running)
                 break;
             }
 
-            Console.Write("Due Date (e.g. 2026-12-25):");
+            Console.Write("Due date (e.g. 2026-12-25): ");
             string dueDateInput = Console.ReadLine() ?? "";
 
             if (!DateTime.TryParse(dueDateInput, out DateTime dueDate))
@@ -50,19 +52,19 @@ while (running)
 
             break;
         case "2":
-            
-
             bool viewTasks = true;
 
             while (viewTasks)
             {
-                Console.WriteLine("\nView Task");
-                Console.WriteLine("1. View All");
-                Console.WriteLine("2. Filter By Status");
-                Console.WriteLine("3. Filter By Priority");
-                Console.WriteLine("4. Sort By Due Date");
-                Console.WriteLine("5. Done");
-                Console.Write("Choose a field to edit: ");
+                Console.WriteLine("\n------------------------");
+                Console.WriteLine("          VIEW TASKS");
+                Console.WriteLine("------------------------");
+                Console.WriteLine("  1. View all");
+                Console.WriteLine("  2. Filter by status");
+                Console.WriteLine("  3. Filter by priority");
+                Console.WriteLine("  4. Sort by due date");
+                Console.WriteLine("  5. Back");
+                Console.Write("\nSelect an option: ");
 
                 string viewChoice = Console.ReadLine() ?? "";
 
@@ -149,6 +151,8 @@ while (running)
                         Console.WriteLine("Invalid option.");
                         break;
                 }
+
+                    Console.WriteLine();
             }
 
             break;
@@ -192,10 +196,10 @@ while (running)
             }
 
             break;
-        case "5":
+        case "6":
             running = false;
             break;
-        case "6":
+        case "5":
             Console.Write("Enter task ID to edit: ");
             string editIdInput = Console.ReadLine() ?? "";
 
@@ -275,5 +279,10 @@ while (running)
         default:
             Console.WriteLine("Invalid option, try again.");
             break;
+    }
+
+    if (running)
+    {
+        Console.WriteLine("\n------------------------");
     }
 }
